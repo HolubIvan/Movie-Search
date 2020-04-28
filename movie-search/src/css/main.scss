@@ -74,24 +74,6 @@
 
 
 
-// cards of films styles
-
-.carousel{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-
-}
-
-.container{
-    grid-column: 2/13;
-    height: 44rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 50px;
-    overflow: hidden;
-}
-
 .card{
     width: 300px;
     height: 420px;
