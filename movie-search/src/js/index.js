@@ -45,6 +45,29 @@ arrowLeft.addEventListener('click', function(){
 
 
 
+// class Card {
+//   constructor(options){
+//     this.img = options.Poster;
+//     this.title = options.Title;
+//     this.year = options.Year;
+//     this.id = options.imdbID;
+//     this.rating = options.ratingImdb;
+//   }
+// }
+
+
+
+
+
+
+async function getRatingImdb(imdbRating){
+  const url = `https://www.omdbapi.com/?i=${imdbRating}&apikey=9b67fc54`;
+  const respond = await fetch(url);
+  const data = await respond.json();
+  return data.imdbRating;
+}
+
+
 
 async function createCards (param){
 const cardsObjects = await getMovieObj(param);
