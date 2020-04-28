@@ -56,7 +56,15 @@ arrowLeft.addEventListener('click', function(){
 // }
 
 
-
+async function getMovieObj(param){
+  const urlFilms = `https://www.omdbapi.com/?s=${param}&apikey=9b67fc54`;
+  const respond = await fetch(urlFilms);
+  const data = await respond.json();
+  await Promise.all(data.Search.map(async (el)=>{
+    el.ratingImdb = await getRatingImdb(el.imdbID);
+  }))
+  return data.Search;
+}
 
 
 
