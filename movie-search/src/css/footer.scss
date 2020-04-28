@@ -1,0 +1,64 @@
+@import './variables.scss';
+
+.footer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    background: radial-gradient(ellipse at top, $color-green, $color-green-dark);
+    width: 100%;
+    height: 60px;
+
+
+    &__rsschool{    
+        text-decoration: none;
+        color: $color-white;
+        font-size: 1.8rem;
+        transition: all .3s;
+    }
+
+    &__github{
+        text-decoration: none;
+        color: $color-white;
+        font-size: 1.8rem;
+        position: relative;
+        transition: all .3s;
+        
+        &::before{
+            content: '';
+            width: 35px;
+            height: 35px;
+            background-image: url(./../img/github.png);
+            background-size: cover;
+            display: inline-block;
+            position: absolute;
+            top: -6px;
+            left: -44px;
+        }
+    }
+}
+
+.footer__rsschool:hover{
+    color: $color-green-light;
+    animation: shaking .2s infinite linear;
+}
+
+.footer__github:hover{
+    color: $color-green-light;
+    animation: shaking .2s infinite linear;
+}
+
+@keyframes shaking{
+    0%{
+        transform: rotate(2deg);
+    }
+    35%{
+        transform: rotate(0deg);
+    }
+    65%{
+        transform: rotate(-2deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
