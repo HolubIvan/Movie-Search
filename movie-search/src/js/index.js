@@ -39,3 +39,50 @@ arrowLeft.addEventListener('click', function(){
 
 
 
+
+
+
+
+
+
+
+async function createCards (param){
+const cardsObjects = await getMovieObj(param);
+console.log(cardsObjects[0])
+console.log(cardsObjects[0].ratingImdb)
+
+  cardsObjects.forEach((el)=>{
+  
+  const node = document.createElement('div');
+  node.classList.add('card');
+  const img = document.createElement('div');
+  img.classList.add('card__image');
+  img.style.backgroundImage = `url(${el.Poster})`;
+  const title = document.createElement('a');
+  title.classList.add('card__title');
+  title.setAttribute('href', `https://www.imdb.com/title/${el.imdbID}/videogallery/`);
+  title.setAttribute('target', '_blank')
+  title.innerText = el.Title;
+  const year = document.createElement('p');
+  year.classList.add('card__year');
+  year.textContent = el.Year;
+  const rating = document.createElement('p');
+  rating.classList.add('card__rating');
+  rating.textContent = el.ratingImdb;
+  node.append(img);
+  node.append(title);
+  node.append(year);
+  node.append(rating);
+  containerForCards.append(node)
+
+})
+}
+
+
+submitButton.addEventListener('click', (event)=>{
+event.preventDefault();
+containerForCards.innerHTML = '';
+createCards(formInput.value);
+})
+
+
