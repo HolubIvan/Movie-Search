@@ -1,7 +1,7 @@
 //import js files
 import "./swiper";
 import {initSlider} from './swiperSettings';
-import {cards, submitButton, formInput, containerForCards,cross,loadingElement} from './variables';
+import {cards, submitButton, formInput, containerForCards,cross,loadingElement,infoOfRequestInDom} from './variables';
 import Card from './Card'
 
 //import css and scss files
@@ -22,43 +22,71 @@ import '../css/crossInputButton.scss';
 // clear form input value by click over cross
 cross.addEventListener('click', () => {
   formInput.value = '';
+  infoOfRequestInDom.textContent = '';
 });
 
 
 
 //async function that make an api call and return an array of obj films
 async function getMovieObj(param){
-  const urlFilms = `https://www.omdbapi.com/?s=${param}&apikey=9b67fc54`;
-  const respond = await fetch(urlFilms);
-  const data = await respond.json();
-  //wait for all promises to complete
-  await Promise.all(data.Search.map(async (el)=>{
-    //init async rating function to get rating of each film and put in into an object
-    el.ratingImdb = await getRatingImdb(el.imdbID);
-  }))
-  return data.Search;
+  try{
+    const urlFilms = `https://www.omdbapi.com/?s=${param}&apikey=87417931`;
+    const respond = await fetch(urlFilms);
+    const data = await respond.json();
+    //wait for all promises to complete
+    await Promise.all(data.Search.map(async (el)=>{
+      //init async rating function to get rating of each film and put in into an object
+      el.ratingImdb = await getRatingImdb(el.imdbID);
+    }))
+    return data.Search;
+  } catch(error){
+    infoOfRequestInDom.textContent = `No results for '${param}'. Try again please.`;
+    console.log(error)
+  }
 }
-
 
 //get a rating of the film by imdb id of film
 async function getRatingImdb(imdbRating){
-  const url = `https://www.omdbapi.com/?i=${imdbRating}&apikey=9b67fc54`;
+  const url = `https://www.omdbapi.com/?i=${imdbRating}&apikey=87417931`;
   const respond = await fetch(url);
   const data = await respond.json();
   return data.imdbRating;
+}
+
+//get translated movie title from rus to eng
+async function translateFilmTitle(param){
+  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200501T111130Z.f0857897fdf97e6d.b9e9f0290f59eeeebfcf97d7e15ff30a61b06aa3&text=${param}&lang=ru-en`;
+  const respond = await fetch(url);
+  const data = await respond.json();
+  return data.text[0];
 }
 
 
 // function that's wait for an array of objects and then iterate 
 //over them and render to html
 async function createCards (param){
-const cardsObjects = await getMovieObj(param);
+  loadingElement.style.display = 'inline-block';
 
-  cardsObjects.forEach((el)=>{
-    //make new card with html markup and insert it to dom
-    const card = new Card(el).makeCardForHtml();
-    containerForCards.insertAdjacentHTML('beforeend', card);
-})
+  //wait to have translation from rus to eng
+  const getTitleInEnglish = await translateFilmTitle(param);
+  
+  //wait to have an array of objects
+  const cardsObjects = await getMovieObj(getTitleInEnglish);
+  if(cardsObjects){
+    infoOfRequestInDom.textContent = '';
+    loadingElement.style.display = 'none';
+    containerForCards.innerHTML = '';
+
+    cardsObjects.forEach((el)=>{
+      //make new card with html markup and insert it to dom
+      const card = new Card(el).makeCardForHtml();
+      containerForCards.insertAdjacentHTML('beforeend', card);
+    })
+  } else {
+    loadingElement.style.display = 'none';
+    return false;
+  }
+  
   //init slider after container of cards is ready
   initSlider();
 }
@@ -69,7 +97,6 @@ const cardsObjects = await getMovieObj(param);
 submitButton.addEventListener('click', (event)=>{
 
   event.preventDefault();
-  containerForCards.innerHTML = '';
 
   //create cards function 
   createCards(formInput.value);

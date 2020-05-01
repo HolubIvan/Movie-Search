@@ -7,7 +7,7 @@
 // form styles
 .form{
     width: 100%;
-    height: 130px;
+    height: 70px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
@@ -65,12 +65,14 @@
 //info paragraph - for errors
 
 .info{
+    height: 30px;
     margin: 0 auto;
     text-align: center;
     font-size: 2.5rem;
     color: $color-green-dark;
-    margin-top: 2.5rem;
+    margin: 10px 0;
     font-weight: 300;
+    transition: all .4s;
 }
 
 
