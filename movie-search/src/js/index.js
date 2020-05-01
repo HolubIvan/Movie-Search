@@ -28,11 +28,14 @@ cross.addEventListener('click', () => {
 
 
 //async function that make an api call and return an array of obj films
-async function getMovieObj(param){
+async function getMovieObj(param, num = 1){
   try{
-    const urlFilms = `https://www.omdbapi.com/?s=${param}&apikey=87417931`;
+    const urlFilms = `https://www.omdbapi.com/?s=${param}&apikey=87417931&page=${num}`;
     const respond = await fetch(urlFilms);
     const data = await respond.json();
+    if(data.Response === 'False'){
+      console.log(data)
+    }
     //wait for all promises to complete
     await Promise.all(data.Search.map(async (el)=>{
       //init async rating function to get rating of each film and put in into an object
@@ -41,7 +44,7 @@ async function getMovieObj(param){
     return data.Search;
   } catch(error){
     infoOfRequestInDom.textContent = `No results for '${param}'. Try again please.`;
-    console.log(error)
+    return false
   }
 }
 
@@ -116,14 +119,6 @@ submitButton.addEventListener('click', (event)=>{
 window.addEventListener('load', ()=>{
   createCards('titanic');
 })
-
-
-
-// formInput.addEventListener('change', (event)=>{
-//   if (/^[а-яА-Я]+$/.test(event.target.value)){
-//     infoOfRequestInDom.textContent = `Shoving results for : ${event.target.value}`;
-//   } 
-// })
 
 
 

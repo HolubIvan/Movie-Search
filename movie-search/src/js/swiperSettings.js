@@ -1,6 +1,6 @@
 export {initSlider};
 
-function initSlider(){
+function initSlider(param){
 const mySwiper = new Swiper ('.swiper-container', {
   
     loop: true,
@@ -16,6 +16,13 @@ const mySwiper = new Swiper ('.swiper-container', {
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
+    },
+    on: {
+      reachEnd: function () {
+        console.log('end')
+        createCards('movie')
+      }
     }
   })
 }
+
