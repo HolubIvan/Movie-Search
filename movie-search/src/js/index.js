@@ -1,21 +1,23 @@
 //import js files
-import "../css/swiper.css";
 import "./swiper";
 import {initSlider} from './swiperSettings';
+import {cards, submitButton, formInput, containerForCards,cross} from './variables';
 
 //import css and scss files
 import '../css/swiperSettings.scss';
+import "../css/swiper.css";
 import '../css/style.css';
 import '../css/base.scss';
 import '../css/header.scss';
 import '../css/main.scss';
 import '../css/variables.scss';
 import '../css/footer.scss';
-import {cards, submitButton, formInput, containerForCards} from './variables';
 
 
-
-
+// clear form input value by click over cross
+cross.addEventListener('click', () => {
+  formInput.value = '';
+});
 
 
 
@@ -56,6 +58,7 @@ async function getRatingImdb(imdbRating){
 
 async function createCards (param){
 const cardsObjects = await getMovieObj(param);
+
 
   cardsObjects.forEach((el)=>{
   
