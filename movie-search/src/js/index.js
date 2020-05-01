@@ -12,6 +12,10 @@ import '../css/header.scss';
 import '../css/main.scss';
 import '../css/variables.scss';
 import '../css/footer.scss';
+import '../css/loadingElement.scss';
+import '../css/crossInputButton.scss';
+
+
 
 
 // clear form input value by click over cross
