@@ -4,6 +4,7 @@ export default class Card {
       this.img = options.Poster;
       this.title = options.Title;
       this.year = options.Year;
+      this.imdbID = options.imdbID;
       this.rating = options.ratingImdb;
     }
   
@@ -11,7 +12,7 @@ export default class Card {
       const markup = 
         `<div class="swiper-slide card">
           <div class="card__image" style="background-image: url(${this.img});"></div>
-          <a href="#" class="card__title">${this.title}
+          <a href="https://www.imdb.com/title/${this.imdbID}/videogallery/" class="card__title" target="_blank">${this.title}
           </a>
           <p class="card__year">${this.year}</p>
           <p class="card__rating">${this.rating}</p>

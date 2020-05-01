@@ -58,6 +58,14 @@ async function translateFilmTitle(param){
   const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200501T111130Z.f0857897fdf97e6d.b9e9f0290f59eeeebfcf97d7e15ff30a61b06aa3&text=${param}&lang=ru-en`;
   const respond = await fetch(url);
   const data = await respond.json();
+
+  //check if request was in russian language
+  if (/^[а-яА-Я]+$/.test(param)){
+    infoOfRequestInDom.textContent = `Shoving results for : ${data.text[0]}`;
+  } else if(/^[a-zA-Z]+$/.test(param)){
+    infoOfRequestInDom.textContent = ``;
+  }
+
   return data.text[0];
 }
 
@@ -69,11 +77,12 @@ async function createCards (param){
 
   //wait to have translation from rus to eng
   const getTitleInEnglish = await translateFilmTitle(param);
-  
+
   //wait to have an array of objects
   const cardsObjects = await getMovieObj(getTitleInEnglish);
   if(cardsObjects){
-    infoOfRequestInDom.textContent = '';
+    
+    //remove loading element and clear container for cards
     loadingElement.style.display = 'none';
     containerForCards.innerHTML = '';
 
@@ -110,6 +119,11 @@ window.addEventListener('load', ()=>{
 
 
 
+// formInput.addEventListener('change', (event)=>{
+//   if (/^[а-яА-Я]+$/.test(event.target.value)){
+//     infoOfRequestInDom.textContent = `Shoving results for : ${event.target.value}`;
+//   } 
+// })
 
 
 
