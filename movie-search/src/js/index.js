@@ -1,7 +1,7 @@
 //import js files
 import "./swiper";
 import {initSlider} from './swiperSettings';
-import {cards, submitButton, formInput, containerForCards,cross} from './variables';
+import {cards, submitButton, formInput, containerForCards,cross,loadingElement} from './variables';
 import Card from './Card'
 
 //import css and scss files
@@ -75,6 +75,11 @@ submitButton.addEventListener('click', (event)=>{
   createCards(formInput.value);
 })
 
+
+//make a basic request and render films when window has loaded
+window.addEventListener('load', ()=>{
+  createCards('titanic');
+})
 
 
 
