@@ -1,28 +1,21 @@
-export {initSlider};
+export {mySwiper};
 
-function initSlider(param){
+//swiper settings
 const mySwiper = new Swiper ('.swiper-container', {
-  
-    loop: true,
-    slidesPerView: 3,
-    spaceBetween: 80,
-  
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
-    },
-  
-    
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    on: {
-      reachEnd: function () {
-        console.log('end')
-        createCards('movie')
-      }
-    }
-  })
-}
+  slidesPerView: 3,
+  spaceBetween: 80,
+  initialSlide: 0,
+  observer: true,
+  update: false,
 
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  },
+
+  
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  }
+})
