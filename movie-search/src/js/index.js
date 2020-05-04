@@ -1,8 +1,11 @@
 //import js files
 import "./swiper";
 import {mySwiper} from './swiperSettings';
-import {cards, submitButton, formInput, containerForCards,cross,loadingElement,infoOfRequestInDom} from './variables';
+import {cards, submitButton, formInput, containerForCards,cross,loadingElement,infoOfRequestInDom, mainContainer, keyboardIcon} from './variables';
 import Card from './Card';
+import {initVirtualKeyboard, deleteVirtualKeyboard, listenClickOnVirtualKeyboard, capsLockVirtualKeyboard, langOnLoad} from './keyboard'
+
+export{createCardsClickSearchButton};
 
 //import css and scss files
 import '../css/swiperSettings.scss';
@@ -16,6 +19,7 @@ import '../css/footer.scss';
 import '../css/loadingElement.scss';
 import '../css/crossInputButton.scss';
 import '../css/mixins.scss';
+import '../css/keyboard.scss';
 
 
 
@@ -131,7 +135,11 @@ submitButton.addEventListener('click', (event)=>{
 
   event.preventDefault();
 
-  createCardsClickSearchButton(formInput.value);
+  if(formInput.value === ''){
+    return false;
+  }else{
+    createCardsClickSearchButton(formInput.value);
+  }
   
 })
 
@@ -163,3 +171,27 @@ mySwiper.on('slideChange', ()=>{
 mySwiper.on('update', ()=>{
   mySwiper.slideTo(activeIndex-10, 600, false);
 })
+
+
+
+
+
+
+
+
+let isKeyboard = false;
+
+//keyboard handler for virtual keyboard
+keyboardIcon.addEventListener('click', (event)=>{
+  if(isKeyboard === false){
+    isKeyboard = true;
+    initVirtualKeyboard();
+    listenClickOnVirtualKeyboard();
+    langOnLoad();
+  } else if(isKeyboard === true){
+    isKeyboard = false;
+    deleteVirtualKeyboard();
+  }
+})
+
+capsLockVirtualKeyboard();

@@ -16,7 +16,7 @@ export default class Card {
           </a>
           <p class="card__year">${this.year}</p>
           <span class="card__wrapper_for_star">
-            <img src="./../img/star.png" class="star" alt="rating-star">
+            <img src="./../img/goldstar.png" class="star" alt="rating-star">
             <p class="card__rating">${this.rating}</p>
           </span>
         </div>`;

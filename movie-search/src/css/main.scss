@@ -175,3 +175,21 @@
     top: -4px;
     left: 6px;
 }
+
+.keyboard-icon{
+    position: absolute;
+    top: 8px;
+    right: 50px;
+    width: 40px;
+    opacity: .5;
+    cursor: pointer;
+    transition: all .4s;
+    
+    @include media-tablet-big {
+        display: none;
+    }
+}
+
+.keyboard-icon:hover{
+    opacity: .9;
+}
