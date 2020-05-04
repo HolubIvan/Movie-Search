@@ -1,6 +1,12 @@
+@import './variables.scss';
+@import './mixins.scss';
+
 .swiper-container {
     width: 80%;
     height: 480px;
     margin: 26px auto 0;
-}
 
+    @include media-tablet {
+        margin: 90px auto 0;
+    }
+}

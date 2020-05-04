@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './mixins.scss';
 
 .header{
     width: 100%;
@@ -6,6 +7,10 @@
     background: linear-gradient(to right, rgba(0, 106, 90, 0.8) 60%, rgba(0,150,127,.2)), url('./../img/movies.jpg') no-repeat;
     background-size: cover;
     display: grid;
+
+    @include media-mobile {
+        height: 8rem;
+    }
 
     &__title{
         text-align: center;
@@ -15,5 +20,13 @@
         align-self: center;
         text-shadow: 0 5px 5px $color-grey;
         cursor: pointer;
+
+        @include media-mobile {
+            font-size: 3rem !important;
+        }
+
+        @include media-tablet {
+            font-size: 5rem;
+        }
     }
 }

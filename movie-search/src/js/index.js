@@ -15,6 +15,7 @@ import '../css/variables.scss';
 import '../css/footer.scss';
 import '../css/loadingElement.scss';
 import '../css/crossInputButton.scss';
+import '../css/mixins.scss';
 
 
 
@@ -71,19 +72,16 @@ async function translateFilmTitle(param){
 }
 
 
-// function that's wait for an array of objects and then iterate 
-//over them and render to html
+// function to create and render cards when search button clicked 
 async function createCardsClickSearchButton (param, num){
   loadingElement.style.display = 'inline-block';
 
   //wait to have translation from rus to eng
   const getTitleInEnglish = await translateFilmTitle(param);
 
-  //wait to have an array of objects
   const cardsObjects = await getMovieObj(getTitleInEnglish, num);
   if(cardsObjects){
     
-    //remove loading element and clear container for cards
     loadingElement.style.display = 'none';
     containerForCards.innerHTML = '';
 
@@ -99,17 +97,17 @@ async function createCardsClickSearchButton (param, num){
   }
 }
 
+
+// function to create and render cards when slider has reached the end
 async function createCardsWhenSliderReachEnd (param, num){
   loadingElement.style.display = 'inline-block';
 
   //wait to have translation from rus to eng
   const getTitleInEnglish = await translateFilmTitle(param);
 
-  //wait to have an array of objects
   const cardsObjects = await getMovieObj(getTitleInEnglish, num);
   if(cardsObjects){
     
-    //remove loading element and clear container for cards
     loadingElement.style.display = 'none';
 
     cardsObjects.forEach((el)=>{
@@ -133,7 +131,6 @@ submitButton.addEventListener('click', (event)=>{
 
   event.preventDefault();
 
-  //create cards function 
   createCardsClickSearchButton(formInput.value);
   
 })
