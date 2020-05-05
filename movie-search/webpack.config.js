@@ -51,6 +51,10 @@ const config = {
         ]
       },
       {
+        test: /\.mp3$/,
+        loader: 'file-loader'
+      },
+      {
         test: /\.css$/,
         use: [
           'style-loader',
@@ -142,6 +146,7 @@ const config = {
     }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
+      favicon: './src/img/favicon.png',
       filename: './index.html'
     }),
     new CopyWebpackPlugin([

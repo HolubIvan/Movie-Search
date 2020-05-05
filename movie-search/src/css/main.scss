@@ -193,3 +193,21 @@
 .keyboard-icon:hover{
     opacity: .9;
 }
+
+.microphone {
+    position: absolute;
+    top: 9px;
+    right: 90px;
+    width: 40px;
+    opacity: .6;
+    cursor: pointer;
+    transition: all .4s;
+
+    @include media-tablet-big {
+        right: 40px;
+    }
+}
+
+.microphone:hover{
+    opacity: .9;
+}

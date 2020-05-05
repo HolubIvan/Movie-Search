@@ -1,9 +1,11 @@
 //import js files
 import "./swiper";
 import {mySwiper} from './swiperSettings';
-import {cards, submitButton, formInput, containerForCards,cross,loadingElement,infoOfRequestInDom, mainContainer, keyboardIcon} from './variables';
+import {cards, submitButton, formInput, containerForCards,cross,loadingElement,infoOfRequestInDom, mainContainer, keyboardIcon,microphoneIcon} from './variables';
 import Card from './Card';
 import {initVirtualKeyboard, deleteVirtualKeyboard, listenClickOnVirtualKeyboard, capsLockVirtualKeyboard, langOnLoad} from './keyboard'
+import {microphoneListener} from './speechRecognition';
+
 
 export{createCardsClickSearchButton};
 
@@ -20,7 +22,6 @@ import '../css/loadingElement.scss';
 import '../css/crossInputButton.scss';
 import '../css/mixins.scss';
 import '../css/keyboard.scss';
-
 
 
 // clear form input value by click over cross
@@ -146,11 +147,11 @@ submitButton.addEventListener('click', (event)=>{
 
 //make a basic request and render films when window has loaded
 window.addEventListener('load', ()=>{
-  createCardsClickSearchButton('titaniC');
+  createCardsClickSearchButton('titanic');
 })
 
 
-//set currentPage and activeIndex variables to manipulate slider
+//set currentPage and activeIndexOfSlide variables to manipulate slider
 let currentPage = 1;
 let activeIndex = 7;
 
@@ -193,5 +194,13 @@ keyboardIcon.addEventListener('click', (event)=>{
     deleteVirtualKeyboard();
   }
 })
-
 capsLockVirtualKeyboard();
+
+
+
+
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+
+microphoneIcon.addEventListener('click', microphoneListener);

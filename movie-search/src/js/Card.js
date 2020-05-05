@@ -1,3 +1,5 @@
+import './../img/goldstar.png';
+
 //class Card that make an object of film and create html markup for that
 export default class Card {
     constructor(options){

@@ -1,12 +1,17 @@
 @import './variables.scss';
+@import './mixins.scss';
 
 .lds-dual-ring {
     display: none;
     width: 60px;
     height: 60px;
     position: absolute;
-    top: 5px;
-    right: 86px;
+    top: 4px;
+    right: 113px;
+
+    @include media-tablet-big {
+      right: 65px;
+  }
   }
   .lds-dual-ring:after {
     content: " ";
