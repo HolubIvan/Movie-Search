@@ -1,4 +1,4 @@
-import './../img/goldstar.png';
+import '../img/goldstar.png';
 
 //class Card that make an object of film and create html markup for that
 export default class Card {
@@ -18,7 +18,7 @@ export default class Card {
           </a>
           <p class="card__year">${this.year}</p>
           <span class="card__wrapper_for_star">
-            <img src="./../img/goldstar.png" class="star" alt="rating-star">
+            <img src="./../dist/img/goldstar.png" class="star" alt="rating-star">
             <p class="card__rating">${this.rating}</p>
           </span>
         </div>`;

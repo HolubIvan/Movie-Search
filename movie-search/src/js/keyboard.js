@@ -84,7 +84,13 @@ function listenClickOnVirtualKeyboard() {
         formInput.value += '  ';
       } else if (event.target.textContent === 'CapsLock') {
         capsLock();
-      } else if (event.target.textContent === '◄' || event.target.textContent === '►' || event.target.textContent === '▲' || event.target.textContent === '▼') {
+      } else if (event.target.textContent === '►') {
+        changeInputFocusRight();
+        return false
+        console.log(formInput.value.length)
+      } else if (event.target.textContent === '◄') {
+        changeInputFocusLeft();
+      } else if (event.target.textContent === '▲' || event.target.textContent === '▼') {
         return false;
       } else {
         keyOnInput.push(event.target.textContent);
@@ -93,6 +99,22 @@ function listenClickOnVirtualKeyboard() {
     });
   });
 }
+let n = 1;
+const changeInputFocusLeft = ()=>{
+  let inputLengthValue = formInput.value.length;
+  formInput.focus()
+  formInput.setSelectionRange(inputLengthValue-n, inputLengthValue-n);
+  n += 1;
+}
+
+const changeInputFocusRight = ()=>{
+  let inputLengthValue = formInput.value.length;
+  formInput.focus()
+  formInput.setSelectionRange(inputLengthValue-n+2, inputLengthValue-n+2);
+  n -= 1;
+}
+
+
 
 // click event for CapsLock
 
