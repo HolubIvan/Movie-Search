@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server --history-api-fallback --inline --open",
     "build": "npm run clear -s && webpack --progress",
     "lint": "eslint ./**/*.js",
-    "clear": "del-cli dist",
+    "clear": "del-cli dist"
   },
   "author": "Netizen",
   "license": "ISC",
